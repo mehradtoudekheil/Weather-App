@@ -1,12 +1,27 @@
 import './App.css';
 
+// import tools 
+import { MyContext } from "./context/MyContext";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import pages
+import HomePage from "./pages/HomePage";
+import City from "./pages/City";
+import AllCities from "./pages/AllCities";
+
+
 function App() {
   return (
-    <div className="App">
-     <p className='bg-gray-900 text-sky-400'>hello</p>
-     <h1 className='text-red-400'>first</h1>
-     <i className="fa fa-user"></i> 
-    </div>
+    <MyContext.Provider value={{}}>
+    <BrowserRouter>
+      <Routes>
+
+        <Route index element={<HomePage />} />
+        <Route path="/City" element={<City/>} />
+        <Route path="/AllCities" element={<AllCities />} />
+        
+      </Routes>
+    </BrowserRouter>
+  </MyContext.Provider>
   );
 }
 
