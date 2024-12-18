@@ -12,6 +12,10 @@ function HomePage() {
     <div className=''>
       <Header/>
       <SearchBox/>
+      <section className='w-full flex justify-between px-10'>
+        <MostVisitedCities/>
+        <MaxMinTemp/>
+      </section>
     </div>
   )
 }
