@@ -12,6 +12,7 @@ import AllCities from "./pages/AllCities";
 
 // import {getData} from "./Services/Weather";
 
+import {apiKey} from "./Services/secrets";
 
 function App() {
 
@@ -35,7 +36,7 @@ function App() {
 
 
       async function searchTemp(city) {
-        let data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=45b93825690fab5c96474be7508da6eb`)
+        let data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
           .then(response => response.json())
         // .then(json => console.log(json));
 
