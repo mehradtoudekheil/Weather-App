@@ -55,7 +55,7 @@ function City() {
             <p className='text-gray-300'>رطوبت :  </p>
             <div className='flex flex-row-reverse'>
               <p className='text-white'>{data.main.humidity}</p>
-              <i class="fa fa-tint mx-2 mt-0.5 text-sky-400"></i>
+              <i className="fa fa-tint mx-2 mt-0.5 text-sky-400"></i>
             </div>
           </div>
           <div className=''>

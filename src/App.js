@@ -11,7 +11,12 @@ import City from "./pages/City";
 import AllCities from "./pages/AllCities";
 
 // import api keys that this file is in gitignore
-import {apiKey} from "./Services/secrets";
+import { apiKey } from "./Services/secrets";
+
+
+// import most visited city data
+// import {mostVisitedCity} from "./Services/MostVisited"
+// import {allCity} from "./Services/allCities";
 
 function App() {
 
@@ -22,17 +27,21 @@ function App() {
   const [SearchResult, setSearchResult] = useState(null);
 
   // condition for show help modal 
-  const [showHelp , setShowHelp] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
+
+  // get most visited cities data and set state
+  const [mostVisited, setMostVisited] = useState([]);
 
 
-// get the result of search one city
+
+
+  // get the result of search one city
   useEffect(() => {
     if (city != null) {
- 
+
       async function searchTemp(city) {
         let data = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
           .then(response => response.json())
-        // .then(json => console.log(json));
 
         setSearchResult(await data)
       }
@@ -42,9 +51,46 @@ function App() {
   }, [city])
 
 
+// get data of most visited citeis 
+
+
+useEffect(() => {
+  const cities = ["tehran", "karaj", "tabriz", "mashhad"];
+  
+  const fetchWeatherData = async () => {
+    let weatherData = []; 
+    
+    for (let city of cities) {
+      try {
+      
+        const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`);
+        
+      
+        if (!response.ok) {
+          throw new Error(`Error fetching data for ${city}: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        
+        weatherData.push(data); 
+      } catch (error) {
+        weatherData.push({ name: city, error: error.message }); 
+      }
+    }
+
+
+    setMostVisited(weatherData);
+    
+  };
+
+  fetchWeatherData(); 
+}, [apiKey]); 
+
+
+
 
   return (
-    <MyContext.Provider value={{ city, setCity, SearchResult, setSearchResult , showHelp , setShowHelp}}>
+    <MyContext.Provider value={{ city, setCity, SearchResult, setSearchResult, showHelp, setShowHelp, mostVisited, setMostVisited }}>
       <BrowserRouter>
         <Routes>
 
