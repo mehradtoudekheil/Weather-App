@@ -40,7 +40,9 @@ useEffect(() => {
         شهر های پر بازدید
       </h6>
       <div className='w-full grid gap-3 mt-5 grid-cols-4 px-3'>
-        {isLoading ? (<p>loading</p>
+        {isLoading ? (<div className='w-full col-1 h-full flex justify-center items-center'>
+                      <p className='text-white'>Loading...</p>
+        </div>
         ) : (info.mostVisited.map(item=>{
            return <Link to={"/city"} onClick={()=>info.setCity(item.name)}  className='col-1 h-28 shadow-sm shadow-gray-950 rounded-xl'>
              <p className='text-white text-center mt-3'>{cityName(item.name)}</p>
